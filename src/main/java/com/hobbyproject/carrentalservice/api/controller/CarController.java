@@ -3,6 +3,7 @@ package com.hobbyproject.carrentalservice.api.controller;
 import com.hobbyproject.carrentalservice.api.dto.CarDto;
 import com.hobbyproject.carrentalservice.api.mapper.EntityToDtoMapper;
 import com.hobbyproject.carrentalservice.entity.Car;
+import com.hobbyproject.carrentalservice.exceptions.CarNotFoundException;
 import com.hobbyproject.carrentalservice.service.CarService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
@@ -59,7 +61,7 @@ public class CarController {
             Car car = opCar.get();
             return EntityToDtoMapper.mapToCarDto(car);
         } else {
-            return null;
+            throw new CarNotFoundException("Invalid Car Id");
         }
     }
 
