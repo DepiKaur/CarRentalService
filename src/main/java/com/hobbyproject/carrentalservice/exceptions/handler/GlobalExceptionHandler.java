@@ -1,5 +1,7 @@
-package com.hobbyproject.carrentalservice.exceptions;
+package com.hobbyproject.carrentalservice.exceptions.handler;
 
+import com.hobbyproject.carrentalservice.exceptions.CarNotFoundException;
+import com.hobbyproject.carrentalservice.exceptions.model.ErrorMessage;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +40,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoSuchElementException.class)
     public ResponseEntity<ErrorMessage> handleNoSuchElementException(Exception e) {
         ErrorMessage message = new ErrorMessage("Not Found");
+        return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(CarNotFoundException.class)
+    public ResponseEntity<ErrorMessage> handleCarNotFoundException(CarNotFoundException e) {
+        ErrorMessage message = new ErrorMessage(e.getMessage());
         return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 

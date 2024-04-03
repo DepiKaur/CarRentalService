@@ -1,4 +1,4 @@
-package com.hobbyproject.carrentalservice.exceptions;
+package com.hobbyproject.carrentalservice.exceptions.model;
 
 /**
  * @author Depinder Kaur
